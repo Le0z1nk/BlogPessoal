@@ -21,10 +21,10 @@ builder.Services.AddSwaggerGen(options =>
     {
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey,
-        Scheme = "bearer",
+        Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Insira o token JWT"
+        Description = "Insira o token JWT dessa forma: Bearer seu_token"
     });
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
@@ -49,13 +49,13 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors();
 
-app.UseSwagger();
-app.UseSwaggerUI();
-
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapControllers();
 
